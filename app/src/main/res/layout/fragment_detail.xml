@@ -63,7 +63,6 @@
             android:textSize="18sp"
             tools:text="John Doe" />
 
-        <!-- Information Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,16 +99,6 @@
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 tools:text="San Francisco, CA" />
-
-            <TextView
-                android:id="@+id/txtEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Email: "
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                tools:text="johndoe@gmail.com" />
 
         </LinearLayout>
 
@@ -153,7 +142,6 @@
                     tools:text="150" />
             </LinearLayout>
 
-            <!-- Followers -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -180,7 +168,6 @@
                     tools:text="300" />
             </LinearLayout>
 
-            <!-- Public Repos -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -207,7 +194,6 @@
                     tools:text="45" />
             </LinearLayout>
 
-            <!-- Public Gists -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

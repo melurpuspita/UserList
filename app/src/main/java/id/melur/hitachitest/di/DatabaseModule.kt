@@ -9,6 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import id.melur.hitachitest.database.UserDao
 import id.melur.hitachitest.database.UserDatabase
+import id.melur.hitachitest.database.UserDetailDao
 import javax.inject.Singleton
 
 @Module
@@ -18,10 +19,18 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): UserDatabase =
-        Room.databaseBuilder(context, UserDatabase::class.java, "User.db").build()
+        Room.databaseBuilder(context, UserDatabase::class.java, "User.db")
+            .fallbackToDestructiveMigration()
+            .build()
 
     @Provides
-    fun provideMovieDao(database: UserDatabase): UserDao =
+    @Singleton
+    fun provideUserDao(database: UserDatabase): UserDao =
         database.userDao()
+
+    @Provides
+    @Singleton
+    fun provideUserDetailDao(database: UserDatabase): UserDetailDao =
+        database.userDetailDao()
 
 }

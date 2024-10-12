@@ -1,36 +1,44 @@
 package id.melur.hitachitest.model
 
+import com.google.gson.annotations.SerializedName
+import id.melur.hitachitest.database.UserDetail
+
 data class UserItem(
-    val avatar_url: String,
-    val bio: Any,
+    @SerializedName("id")
+    val id: Int = 0,
+    @SerializedName("avatar_url")
+    val avatarUrl: String,
+    @SerializedName("blog")
     val blog: String,
+    @SerializedName("company")
     val company: String,
-    val created_at: String,
-    val email: Any,
-    val events_url: String,
+    @SerializedName("followers")
     val followers: Int,
-    val followers_url: String,
+    @SerializedName("following")
     val following: Int,
-    val following_url: String,
-    val gists_url: String,
-    val gravatar_id: String,
-    val hireable: Any,
-    val html_url: String,
-    val id: Int,
+    @SerializedName("location")
     val location: String,
+    @SerializedName("login")
     val login: String,
+    @SerializedName("name")
     val name: String,
-    val node_id: String,
-    val organizations_url: String,
-    val public_gists: Int,
-    val public_repos: Int,
-    val received_events_url: String,
-    val repos_url: String,
-    val site_admin: Boolean,
-    val starred_url: String,
-    val subscriptions_url: String,
-    val twitter_username: String,
-    val type: String,
-    val updated_at: String,
-    val url: String
-)
+    @SerializedName("public_gists")
+    val publicGists: Int,
+    @SerializedName("public_repos")
+    val publicRepos: Int
+) {
+    fun toDataEntity(): UserDetail =
+        UserDetail(
+            id = id,
+            avatarUrl = avatarUrl,
+            blog = blog,
+            company = company,
+            followers = followers,
+            following = following,
+            location = location,
+            login = login,
+            name = name,
+            publicGists = publicGists,
+            publicRepos = publicRepos
+        )
+}

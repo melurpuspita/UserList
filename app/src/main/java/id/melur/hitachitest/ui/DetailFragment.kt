@@ -10,9 +10,9 @@ import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import id.melur.hitachitest.R
+import id.melur.hitachitest.database.UserDetail
 import id.melur.hitachitest.databinding.FragmentDetailBinding
 import id.melur.hitachitest.helper.Result
-import id.melur.hitachitest.model.UserItem
 import id.melur.hitachitest.viewmodel.ViewModel
 
 @AndroidEntryPoint
@@ -23,14 +23,14 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private val viewModel: ViewModel by viewModels()
 
-    private val observer: Observer<Result<UserItem>> = Observer { result ->
+    private val observer: Observer<Result<UserDetail>> = Observer { result ->
         when (result) {
             is Result.Loading -> {
                 binding.linearDetail.visibility = View.GONE
             }
             is Result.Success -> {
                 val user = result.data
-                onUpdateLayout(user!!)
+                onUpdateLayout(user)
             }
             is Result.Error -> {}
         }
@@ -56,24 +56,25 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         viewModel.getUserData(username!!).observe(viewLifecycleOwner, observer)
     }
 
-    private fun onUpdateLayout(data: UserItem){
-        binding.circularProgressBar.visibility = View.GONE
-        binding.linearDetail.visibility = View.VISIBLE
-        Glide.with(context!!)
-            .load(data.avatar_url)
-            .fitCenter()
-            .into(binding.imgUserPhoto)
+    private fun onUpdateLayout(data: UserDetail?){
+        if(data != null){
+            binding.circularProgressBar.visibility = View.GONE
+            binding.linearDetail.visibility = View.VISIBLE
+            Glide.with(context!!)
+                .load(data.avatarUrl)
+                .fitCenter()
+                .into(binding.imgUserPhoto)
 
-        binding.txtUsername.text = data.login
-        binding.txtName.text = data.name
-        binding.txtCompany.text = data.company
-        binding.txtBlog.text = data.blog
-        binding.txtLocation.text = data.location
-        binding.txtEmail.text = data.email.toString()
-        binding.txtFollowingCount.text = data.following.toString()
-        binding.txtFollowersCount.text = data.followers.toString()
-        binding.txtReposCount.text = data.public_repos.toString()
-        binding.txtGistsCount.text = data.public_gists.toString()
+            binding.txtUsername.text = data.login
+            binding.txtName.text = data.name
+            binding.txtCompany.text = data.company
+            binding.txtBlog.text = data.blog
+            binding.txtLocation.text = data.location
+            binding.txtFollowingCount.text = data.following.toString()
+            binding.txtFollowersCount.text = data.followers.toString()
+            binding.txtReposCount.text = data.publicRepos.toString()
+            binding.txtGistsCount.text = data.publicGists.toString()
+        }
     }
 
 }

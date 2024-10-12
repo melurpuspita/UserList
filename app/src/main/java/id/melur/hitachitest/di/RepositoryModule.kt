@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import id.melur.hitachitest.database.UserDao
+import id.melur.hitachitest.database.UserDetailDao
 import id.melur.hitachitest.helper.DataRepo
 import id.melur.hitachitest.service.ApiService
 import javax.inject.Singleton
@@ -15,6 +16,6 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideMovieRepository(apiService: ApiService, userDao: UserDao) =
-        DataRepo(apiService, userDao)
+    fun provideUserRepository(apiService: ApiService, userDao: UserDao, userDetailDao: UserDetailDao) =
+        DataRepo(apiService, userDao, userDetailDao)
 }
