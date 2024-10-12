@@ -1,8 +1,13 @@
 package id.melur.hitachitest.service
 
-interface ApiService {
+import id.melur.hitachitest.model.DataResponse
+import retrofit2.http.GET
 
+interface ApiService {
     companion object {
-        const val BASE_URL = "https://api.github.com/users/"
+        const val BASE_URL = "https://api.github.com/"
     }
+
+    @GET("users")
+    suspend fun getData() : DataResponse
 }

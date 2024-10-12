@@ -8,5 +8,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "user")
 data class User(
     @PrimaryKey
-    @ColumnInfo(name = "id") var id: Int
+    @ColumnInfo(name = "id") var id: Int,
+    @ColumnInfo(name = "login") var login: String,
+    @ColumnInfo(name = "avatar_url") var avatarUrl: String
 )

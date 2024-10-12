@@ -7,9 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import id.melur.hitachitest.R
+import id.melur.hitachitest.adapter.DataAdapter
+import id.melur.hitachitest.database.User
 import id.melur.hitachitest.databinding.FragmentMainBinding
+import id.melur.hitachitest.helper.Result
 import id.melur.hitachitest.viewmodel.ViewModel
 
 @AndroidEntryPoint
@@ -18,8 +22,19 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var dataAdapter: DataAdapter
     private val viewModel: ViewModel by viewModels()
-    private val observerRegister: Observer<Long> = Observer {}
+
+    private val observer: Observer<Result<List<User>>> = Observer { result ->
+        when (result) {
+            is Result.Loading -> {}
+            is Result.Success -> {
+                val user = result.data
+                dataAdapter.submitList(user)
+            }
+            is Result.Error -> {}
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +52,16 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        getDataFromAPI()
     }
 
+    private fun getDataFromAPI() {
+        viewModel.getData().observe(viewLifecycleOwner, observer)
+
+        binding.rvUser.apply {
+            dataAdapter = DataAdapter()
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = dataAdapter
+        }
+    }
 }

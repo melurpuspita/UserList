@@ -10,4 +10,5 @@ class ViewModel @Inject constructor(
     private val dataRepo: DataRepo,
 ) : ViewModel() {
 
+    fun getData() = dataRepo.getAllData()
 }
