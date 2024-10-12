@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import id.melur.hitachitest.R
@@ -59,7 +60,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         viewModel.getData().observe(viewLifecycleOwner, observer)
 
         binding.rvUser.apply {
-            dataAdapter = DataAdapter()
+            dataAdapter = DataAdapter(findNavController())
             layoutManager = LinearLayoutManager(requireContext())
             adapter = dataAdapter
         }

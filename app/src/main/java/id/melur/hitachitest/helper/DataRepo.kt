@@ -5,6 +5,7 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.map
 import id.melur.hitachitest.database.User
 import id.melur.hitachitest.database.UserDao
+import id.melur.hitachitest.model.UserItem
 import id.melur.hitachitest.service.ApiService
 import javax.inject.Inject
 
@@ -18,8 +19,8 @@ class DataRepo @Inject constructor(
         try {
             val response = apiService.getData().toList()
 
-            val data = response.map { dummy ->
-                dummy.toDataEntity()
+            val data = response.map { user ->
+                user.toDataEntity()
             }
 
             userDao.deleteAllData()
@@ -30,5 +31,15 @@ class DataRepo @Inject constructor(
         val localData: LiveData<Result<List<User>>> =
             userDao.getData().map { Result.Success(it) }
         emitSource(localData)
+    }
+
+    fun getUserData(username: String) : LiveData<Result<UserItem>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getUserById(username)
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        }
     }
 }

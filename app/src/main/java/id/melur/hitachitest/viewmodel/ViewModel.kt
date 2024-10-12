@@ -11,4 +11,6 @@ class ViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun getData() = dataRepo.getAllData()
+
+    fun getUserData(username : String) = dataRepo.getUserData(username)
 }

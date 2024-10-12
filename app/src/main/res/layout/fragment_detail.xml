@@ -1,112 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="?android:attr/windowBackground">
 
+    <ProgressBar
+        android:id="@+id/circularProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        style="?android:attr/progressBarStyleLarge"
+        android:indeterminate="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:elevation="2dp"/>
+
     <LinearLayout
+        android:id="@+id/linearDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imgUserPhoto"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:src="@drawable/githublogo"
-            android:contentDescription="User Photo"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="12dp"
-            android:scaleType="centerCrop"
             android:background="@drawable/circle_shape"
-            android:elevation="4dp"/>
+            android:contentDescription="User Photo"
+            android:elevation="4dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/githublogo" />
 
         <TextView
             android:id="@+id/txtUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:text="Username"
+            android:textColor="@android:color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="8dp"
-            tools:text="john_doe"/>
+            tools:text="john_doe" />
 
         <TextView
             android:id="@+id/txtName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Full Name"
-            android:textSize="18sp"
-            android:textColor="@android:color/darker_gray"
             android:layout_marginBottom="12dp"
-            tools:text="John Doe"/>
+            android:text="Full Name"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18sp"
+            tools:text="John Doe" />
 
         <!-- Information Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp"
             android:background="@drawable/rounded_corner_bg"
-            android:elevation="4dp">
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <TextView
                 android:id="@+id/txtCompany"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Company: "
-                android:textSize="16sp"
                 android:textColor="@android:color/black"
-                tools:text="Google"/>
+                android:textSize="16sp"
+                tools:text="Google" />
 
             <TextView
                 android:id="@+id/txtBlog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Blog: "
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
                 android:layout_marginTop="8dp"
-                tools:text="https://myblog.com"/>
+                android:text="Blog: "
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                tools:text="https://myblog.com" />
 
             <TextView
                 android:id="@+id/txtLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Location: "
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
                 android:layout_marginTop="8dp"
-                tools:text="San Francisco, CA"/>
+                android:text="Location: "
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                tools:text="San Francisco, CA" />
 
             <TextView
                 android:id="@+id/txtEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email: "
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
                 android:layout_marginTop="8dp"
-                tools:text="johndoe@gmail.com"/>
+                android:text="Email: "
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                tools:text="johndoe@gmail.com" />
 
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center"
+            android:orientation="horizontal"
             android:weightSum="4">
 
             <LinearLayout
@@ -121,18 +139,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Following"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray"/>
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtFollowingCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="150"
+                    android:textColor="@android:color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="@android:color/black"
-                    tools:text="150"/>
+                    tools:text="150" />
             </LinearLayout>
 
             <!-- Followers -->
@@ -148,18 +166,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Followers"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray"/>
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtFollowersCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="300"
+                    android:textColor="@android:color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="@android:color/black"
-                    tools:text="300"/>
+                    tools:text="300" />
             </LinearLayout>
 
             <!-- Public Repos -->
@@ -175,18 +193,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Repos"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray"/>
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtReposCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="45"
+                    android:textColor="@android:color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="@android:color/black"
-                    tools:text="45"/>
+                    tools:text="45" />
             </LinearLayout>
 
             <!-- Public Gists -->
@@ -202,19 +220,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Gists"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray"/>
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtGistsCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5"
+                    android:textColor="@android:color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="@android:color/black"
-                    tools:text="5"/>
+                    tools:text="5" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
