@@ -1,6 +1,7 @@
 package id.melur.hitachitest.di
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
@@ -10,6 +11,7 @@ import dagger.hilt.components.SingletonComponent
 import id.melur.hitachitest.database.UserDao
 import id.melur.hitachitest.database.UserDatabase
 import id.melur.hitachitest.database.UserDetailDao
+import java.util.concurrent.Executors
 import javax.inject.Singleton
 
 @Module
@@ -21,7 +23,12 @@ object DatabaseModule {
     fun provideDatabase(@ApplicationContext context: Context): UserDatabase =
         Room.databaseBuilder(context, UserDatabase::class.java, "User.db")
             .fallbackToDestructiveMigration()
-            .build()
+            .setQueryCallback(
+                { sqlQuery, bindArgs ->
+                    Log.d("RoomQuery", "SQL Query: $sqlQuery SQL Args: ${bindArgs.joinToString()}")
+                },
+                Executors.newSingleThreadExecutor()
+            ).build()
 
     @Provides
     @Singleton

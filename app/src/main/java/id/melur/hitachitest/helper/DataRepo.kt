@@ -51,4 +51,15 @@ class DataRepo @Inject constructor(
             userDetailDao.getData(username).map { Result.Success(it) }
         emitSource(localData)
     }
+
+    fun getUser(username: String) : LiveData<Result<List<User>>> = liveData {
+        emit(Result.Loading)
+        try {
+            val localData: LiveData<Result<List<User>>> =
+                userDao.getDataByUsername(username).map { Result.Success(it) }
+            emitSource(localData)
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        }
+    }
 }

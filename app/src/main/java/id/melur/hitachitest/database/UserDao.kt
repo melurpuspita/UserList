@@ -8,6 +8,9 @@ interface UserDao {
     @Query("SELECT * FROM user")
     fun getData(): LiveData<List<User>>
 
+    @Query("SELECT * FROM user WHERE login LIKE '%' || :username || '%'")
+    fun getDataByUsername(username: String): LiveData<List<User>>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAPIData(user: List<User>)
 

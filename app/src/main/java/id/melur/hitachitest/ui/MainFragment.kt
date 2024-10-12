@@ -37,6 +37,17 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
     }
 
+    private val searchObserver: Observer<Result<List<User>>> = Observer { result ->
+        when (result) {
+            is Result.Loading -> {}
+            is Result.Success -> {
+                val user = result.data
+                dataAdapter.submitList(user)
+            }
+            is Result.Error -> {}
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,6 +65,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getDataFromAPI()
+        onSearchButton()
     }
 
     private fun getDataFromAPI() {
@@ -63,6 +75,12 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             dataAdapter = DataAdapter(findNavController())
             layoutManager = LinearLayoutManager(requireContext())
             adapter = dataAdapter
+        }
+    }
+
+    private fun onSearchButton(){
+        binding.imgSearch.setOnClickListener{
+            viewModel.getUser(binding.edSearch.text.toString()).observe(viewLifecycleOwner, searchObserver)
         }
     }
 }
